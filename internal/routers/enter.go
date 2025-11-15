@@ -19,6 +19,7 @@ func Run() {
 	//使用全局中间件
 	gr.Use(middleware.LogMiddleWare).Use(middleware.Cors())
 	UserRouters(gr)
+	ArticleRouters(gr)
 	//启动路由监听
 	addr := global.Config.System.Addr()
 	err := r.Run(addr)

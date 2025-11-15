@@ -13,4 +13,5 @@ type UserModel struct {
 	Avatar    string                  `gorm:"not null" json:"avatar"`
 	Status    int                     `gorm:"default:1" json:"status"` //1 正常 2 Baned
 	RegSource enum.RegisterSourceType `json:"regSource"`               //注册来源
+	Role      enum.RoleType           `json:"role"`
 }

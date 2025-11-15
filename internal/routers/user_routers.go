@@ -10,4 +10,5 @@ func UserRouters(gr *gin.RouterGroup) {
 	app := api.App.UserApi
 	gr.POST("auth/email-code", app.SendEmail)
 	gr.POST("auth/register", middleware.EmailVerifyMiddleware, app.EmailRegister)
+	gr.POST("auth/email-login", app.EmailLogin)
 }
