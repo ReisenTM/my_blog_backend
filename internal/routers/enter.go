@@ -17,7 +17,7 @@ func Run() {
 	//创建路由组
 	gr := r.Group("/api")
 	//使用全局中间件
-	gr.Use(middleware.LogMiddleWare).Use(middleware.Cors())
+	gr.Use(middleware.LoggerMiddleware).Use(middleware.Cors())
 	UserRouters(gr)
 	ArticleRouters(gr)
 	//启动路由监听

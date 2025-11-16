@@ -6,7 +6,7 @@ import (
 	"blog/internal/model"
 	"blog/internal/model/custom"
 	"blog/internal/utils/jwts"
-	"blog/internal/utils/str"
+	utilsMarkdown "blog/internal/utils/markdown"
 	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
 )
@@ -25,14 +25,17 @@ func (ArticleApi) PostArticle(c *gin.Context) {
 		return
 	}
 	claims := jwts.GetClaims(c)
+	renderedHTML := utilsMarkdown.RenderMarkdown(req.Content)
+	preview, _ := utilsMarkdown.GetPreviewContent(req.Content, 50)
+
 	newArticle := model.ArticleModel{
 		Slug:       uuid.NewString(),
 		Title:      req.Title,
-		Summary:    str.Substr(req.Content, 50),
+		Summary:    preview,
 		Categories: req.Categories,
 		Tags:       req.Tags,
 		AuthorID:   claims.Username,
-		Content:    req.Content,
+		Content:    renderedHTML,
 	}
 	err := global.DB.Create(&newArticle).Error
 	if err != nil {

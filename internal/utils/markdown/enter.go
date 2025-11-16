@@ -37,3 +37,8 @@ func GetPreviewContent(md string, length int) (preview string, err error) {
 	}
 	return
 }
+
+// RenderMarkdown 将 Markdown 文本转换为 HTML 字符串
+func RenderMarkdown(md string) string {
+	return string(mdToHTML([]byte(md)))
+}
